@@ -46,22 +46,35 @@ class VolumeInfo extends Equatable {
   final String? infoLink;
   final String? canonicalVolumeLink;
 
-  factory VolumeInfo.fromJson(Map<String, dynamic> json){
+  factory VolumeInfo.fromJson(Map<String, dynamic> json) {
     return VolumeInfo(
-      title: json["title"],
-      authors: json["authors"] == null ? [] : List<String>.from(json["authors"]!.map((x) => x)),
+      title: json["title"] ?? "No title",
+      authors: json["authors"] == null
+          ? ["No author"]
+          : List<String>.from(json["authors"]!.map((x) => x)),
       publishedDate: DateTime.tryParse(json["publishedDate"] ?? ""),
       description: json["description"],
-      industryIdentifiers: json["industryIdentifiers"] == null ? [] : List<IndustryIdentifier>.from(json["industryIdentifiers"]!.map((x) => IndustryIdentifier.fromJson(x))),
-      readingModes: json["readingModes"] == null ? null : ReadingModes.fromJson(json["readingModes"]),
+      industryIdentifiers: json["industryIdentifiers"] == null
+          ? []
+          : List<IndustryIdentifier>.from(json["industryIdentifiers"]!
+              .map((x) => IndustryIdentifier.fromJson(x))),
+      readingModes: json["readingModes"] == null
+          ? null
+          : ReadingModes.fromJson(json["readingModes"]),
       pageCount: json["pageCount"],
       printType: json["printType"],
-      categories: json["categories"] == null ? [] : List<String>.from(json["categories"]!.map((x) => x)),
+      categories: json["categories"] == null
+          ? []
+          : List<String>.from(json["categories"]!.map((x) => x)),
       maturityRating: json["maturityRating"],
       allowAnonLogging: json["allowAnonLogging"],
       contentVersion: json["contentVersion"],
-      panelizationSummary: json["panelizationSummary"] == null ? null : PanelizationSummary.fromJson(json["panelizationSummary"]),
-      imageLinks: json["imageLinks"] == null ? null : ImageLinks.fromJson(json["imageLinks"]),
+      panelizationSummary: json["panelizationSummary"] == null
+          ? null
+          : PanelizationSummary.fromJson(json["panelizationSummary"]),
+      imageLinks: json["imageLinks"] == null
+          ? null
+          : ImageLinks.fromJson(json["imageLinks"]),
       language: json["language"],
       previewLink: json["previewLink"],
       infoLink: json["infoLink"],
@@ -70,27 +83,47 @@ class VolumeInfo extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-    "title": title,
-    "authors": authors.map((x) => x).toList(),
-    "publishedDate": "${publishedDate!.year.toString().padLeft(4,'0')}-${publishedDate!.month.toString().padLeft(2,'0')}-${publishedDate!.day.toString().padLeft(2,'0')}",
-    "description": description,
-    "industryIdentifiers": industryIdentifiers.map((x) => x.toJson()).toList(),
-    "readingModes": readingModes?.toJson(),
-    "pageCount": pageCount,
-    "printType": printType,
-    "categories": categories.map((x) => x).toList(),
-    "maturityRating": maturityRating,
-    "allowAnonLogging": allowAnonLogging,
-    "contentVersion": contentVersion,
-    "panelizationSummary": panelizationSummary?.toJson(),
-    "imageLinks": imageLinks?.toJson(),
-    "language": language,
-    "previewLink": previewLink,
-    "infoLink": infoLink,
-    "canonicalVolumeLink": canonicalVolumeLink,
-  };
+        "title": title,
+        "authors": authors.map((x) => x).toList(),
+        "publishedDate":
+            "${publishedDate!.year.toString().padLeft(4, '0')}-${publishedDate!.month.toString().padLeft(2, '0')}-${publishedDate!.day.toString().padLeft(2, '0')}",
+        "description": description,
+        "industryIdentifiers":
+            industryIdentifiers.map((x) => x.toJson()).toList(),
+        "readingModes": readingModes?.toJson(),
+        "pageCount": pageCount,
+        "printType": printType,
+        "categories": categories.map((x) => x).toList(),
+        "maturityRating": maturityRating,
+        "allowAnonLogging": allowAnonLogging,
+        "contentVersion": contentVersion,
+        "panelizationSummary": panelizationSummary?.toJson(),
+        "imageLinks": imageLinks?.toJson(),
+        "language": language,
+        "previewLink": previewLink,
+        "infoLink": infoLink,
+        "canonicalVolumeLink": canonicalVolumeLink,
+      };
 
   @override
   List<Object?> get props => [
-    title, authors, publishedDate, description, industryIdentifiers, readingModes, pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, imageLinks, language, previewLink, infoLink, canonicalVolumeLink, ];
+        title,
+        authors,
+        publishedDate,
+        description,
+        industryIdentifiers,
+        readingModes,
+        pageCount,
+        printType,
+        categories,
+        maturityRating,
+        allowAnonLogging,
+        contentVersion,
+        panelizationSummary,
+        imageLinks,
+        language,
+        previewLink,
+        infoLink,
+        canonicalVolumeLink,
+      ];
 }

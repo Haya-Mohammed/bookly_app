@@ -1,4 +1,4 @@
-import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'book_rating.dart';
@@ -6,8 +6,9 @@ import 'botton_actions.dart';
 import 'custom_book_image.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  final BookModel bookModel;
-  const BookDetailsSection({super.key, required this.bookModel});
+  final BookEntity bookEntity;
+
+  const BookDetailsSection({super.key, required this.bookEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +18,18 @@ class BookDetailsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.2),
           child: CustomBookImage(
-            imageUrl: bookModel.volumeInfo?.imageLinks?.thumbnail ?? '',
+            imageUrl: bookEntity.image ?? '',
           ),
         ),
         const SizedBox(height: 43),
         Text(
-          bookModel.volumeInfo?.title ?? '',
+          bookEntity.title ?? '',
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 6),
         Text(
-          bookModel.volumeInfo?.authors[0] ?? '',
+          bookEntity.authorName ?? '',
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontStyle: FontStyle.italic,
                 color: Colors.white.withOpacity(0.7),
@@ -40,7 +41,7 @@ class BookDetailsSection extends StatelessWidget {
           ratingCount: 3459,
         ),
         const SizedBox(height: 30),
-        ButtonAction(bookModel: bookModel),
+        ButtonAction(bookEntity: bookEntity),
       ],
     );
   }

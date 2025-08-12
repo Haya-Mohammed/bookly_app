@@ -44,8 +44,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<List<BookEntity>> fetchSimilarBooks({required String category}) async {
     var data = await apiService.get(
-      //ToDo: add the category in the url
-      endPoint: 'volumes?Filtering=free-ebooks&q=subject:programming',
+      endPoint: 'volumes?Filtering=free-ebooks&q=$category',
     );
 
     List<BookEntity> books = getBooksList(data);

@@ -10,6 +10,7 @@ class BookModel extends BookEntity {
   final String id;
   final String? etag;
   final String? selfLink;
+  final String? previewLink;
   final VolumeInfo? volumeInfo;
   final SaleInfo? saleInfo;
   final AccessInfo? accessInfo;
@@ -20,6 +21,7 @@ class BookModel extends BookEntity {
     required this.id,
     required this.etag,
     required this.selfLink,
+    required this.previewLink,
     required this.volumeInfo,
     required this.saleInfo,
     required this.accessInfo,
@@ -28,9 +30,11 @@ class BookModel extends BookEntity {
           bookId: id,
           image: volumeInfo?.imageLinks?.thumbnail ?? '',
           title: volumeInfo?.title ?? 'No title',
-          authorName: volumeInfo?.authors?.first ?? 'No author',
+          authorName: volumeInfo?.authors.first ?? 'No author',
           price: 0.0,
           rating: 5.0,
+          categories: volumeInfo?.categories ?? ['No categories'],
+          previewLink: previewLink ?? '',
         );
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
@@ -39,6 +43,7 @@ class BookModel extends BookEntity {
       id: json["id"],
       etag: json["etag"],
       selfLink: json["selfLink"],
+      previewLink: json["previewLink"],
       volumeInfo: json["volumeInfo"] == null
           ? null
           : VolumeInfo.fromJson(json["volumeInfo"]),
@@ -56,6 +61,7 @@ class BookModel extends BookEntity {
         "id": id,
         "etag": etag,
         "selfLink": selfLink,
+        "previewLink": previewLink,
         "volumeInfo": volumeInfo?.toJson(),
         "saleInfo": saleInfo?.toJson(),
         "accessInfo": accessInfo?.toJson(),
@@ -68,6 +74,7 @@ class BookModel extends BookEntity {
         id,
         etag,
         selfLink,
+        previewLink,
         volumeInfo,
         saleInfo,
         accessInfo,

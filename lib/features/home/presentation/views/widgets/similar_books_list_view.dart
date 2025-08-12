@@ -13,26 +13,27 @@ class SimilarBooksListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SimilarBooksCubit, SimilarBooksState>(
-        builder: (context, state) {
-      if (state is SimilarBooksSuccessState) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.15,
-          child: ListView.builder(
-            itemCount: state.books.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: CustomBookImage(
-                imageUrl: state.books[index].image ?? '',
+      builder: (context, state) {
+        if (state is SimilarBooksSuccessState) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.15,
+            child: ListView.builder(
+              itemCount: state.books.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: CustomBookImage(
+                  imageUrl: state.books[index].image ?? '',
+                ),
               ),
             ),
-          ),
-        );
-      } else if (state is SimilarBooksFailureState) {
-        return CustomErrorWidget(errMessage: state.errMessage);
-      } else {
-        return const CustomLoadingIndicator();
-      }
-    });
+          );
+        } else if (state is SimilarBooksFailureState) {
+          return CustomErrorWidget(errMessage: state.errMessage);
+        } else {
+          return const CustomLoadingIndicator();
+        }
+      },
+    );
   }
 }
